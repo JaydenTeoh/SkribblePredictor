@@ -3,11 +3,16 @@ import time
 import numpy as np
 import cv2
 from PIL import Image, ImageFilter
+import os
+
 
 class DoodlePredictor():
     def __init__(self, rest_interval=10):
         self.rest_interval = rest_interval
-        self.model = load_model("../Classifier/predictor.h5")
+        # Get the root path of your project (assuming the script is in a subdirectory)
+        root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+        predictor_path = os.path.join(root_path, 'Classifier', 'predictor.h5')
+        self.model = load_model(predictor_path)
         self.last_predict = time.time()
         self.categories = ["Apple", "Flower", "Cake", "Fish", "Star"]
 
