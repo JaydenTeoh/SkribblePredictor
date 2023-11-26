@@ -28,6 +28,8 @@ img_canvas = np.zeros((720, 1280, 3), np.uint8)
 
 while True:
     success, img = cap.read()
+    if not success:
+        break
     img = cv2.flip(img, 1)
 
     img = detector.findHands(img) # detect hands
@@ -57,6 +59,7 @@ while True:
 
             # cv2.line(img, (prev_X,prev_Y), (index_X, index_Y), eraseColor, eraseThickness)
             cv2.line(img_canvas, (prev_Erase_X,prev_Erase_Y), (index_X, index_Y), eraseColor, eraseThickness)
+        
         # Drawing Mode (index finger up, mdidle finger down)
         elif fingers["Finger 1"] and not fingers["Finger 2"] and not fingers["Finger 3"] and not fingers["Finger 4"] and not fingers["Thumb"]:
             cv2.circle(img, (index_X,index_Y), 15, drawColor, cv2.FILLED)
@@ -73,6 +76,8 @@ while True:
             img_canvas = np.zeros((720, 1280, 3), np.uint8)
             prev_X, prev_Y = 0,0
             prev_Erase_X, prev_Erase_Y = 0,0
+            predicted_drawing = ""
+            
         else:
             prev_X, prev_Y = 0,0
             prev_Erase_X, prev_Erase_Y = 0,0
