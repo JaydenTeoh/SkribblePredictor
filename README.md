@@ -3,7 +3,7 @@ Predicting doodles using Computer Vision and Machine Learning
 
 # Running the code
 ```
-python Doodle/Painter..py
+python Doodle/Painter.py
 ```
 # Available Drawings to Detect
 Currently it is only trained to detect
